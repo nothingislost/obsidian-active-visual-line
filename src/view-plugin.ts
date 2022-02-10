@@ -14,7 +14,7 @@ export const activeVisualLine = ViewPlugin.fromClass(
       const config = { attributes: true, childList: true, subtree: true },
         selectionLayer = view.dom.querySelector(".cm-selectionLayer"),
         cursorLayer = view.dom.querySelector(".cm-cursorLayer"),
-        contentDOM = view.contentDOM;
+        contentDOM = view.dom;
       if (!selectionLayer || !cursorLayer) return;
       this.highlightLayerEl = view.scrollDOM.createDiv("cm-highlightLayer");
       this.highlightLayerEl.ariaHidden = "true";
