@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-active-visual-line",
+  "name": "Active Visual Line",
+  "version": "0.0.1",
+  "minAppVersion": "0.13.4",
+  "description": "Add a line highlight to the active visual line",
+  "author": "NothingIsLost",
+  "authorUrl": "https://github.com/nothingislost",
+  "isDesktopOnly": false
+}
