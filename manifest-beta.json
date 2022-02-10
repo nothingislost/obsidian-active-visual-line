@@ -1,7 +1,7 @@
 {
   "id": "obsidian-active-visual-line",
   "name": "Active Visual Line",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "minAppVersion": "0.13.4",
   "description": "Add a line highlight to the active visual line",
   "author": "NothingIsLost",

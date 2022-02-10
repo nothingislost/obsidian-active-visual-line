@@ -3,8 +3,7 @@
 }
 
 .cm-active-visual-line {
-  z-index: -1; /* this must be a value < 0 */
-  padding: 2px 0; /* this is not easily changed */
   background-color: var(--active-line-bg);
+  z-index: 10;
   position: absolute !important; /* everything breaks if this isn't absolute */
 }
