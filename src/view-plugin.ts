@@ -16,9 +16,14 @@ export const activeVisualLine = ViewPlugin.fromClass(
         cursorLayer = view.dom.querySelector(".cm-cursorLayer"),
         contentDOM = view.dom;
       if (!selectionLayer || !cursorLayer) return;
+      document.body.addClass("active-visual-line");
       this.highlightLayerEl = view.scrollDOM.createDiv("cm-highlightLayer");
       this.highlightLayerEl.ariaHidden = "true";
       const visualLineEl = this.highlightLayerEl.createDiv("cm-active-visual-line");
+      let scrollBarProps = getComputedStyle(view.dom, "::-webkit-scrollbar");
+      let scrollBarsEnabled = scrollBarProps.getPropertyValue("display");
+      let scrollbarWidth = scrollBarsEnabled === "none" ? 0 : parseInt(scrollBarProps.getPropertyValue("width"));
+      console.log("scr", scrollbarWidth);
       this.observer = new MutationObserver((mutationsList, observer) => {
         mutationsList.forEach(mutation => {
           let height: number, top: number;
@@ -36,7 +41,7 @@ export const activeVisualLine = ViewPlugin.fromClass(
           }
           if (height && top) {
             let left = contentDOM.offsetLeft,
-              width = contentDOM.offsetWidth;
+              width = contentDOM.offsetWidth - scrollbarWidth;
             visualLineEl.setAttribute(
               "style",
               `height: ${height + 6}px; top: ${top - 2}px; left: ${left}px; width: ${width}px;`
@@ -54,6 +59,7 @@ export const activeVisualLine = ViewPlugin.fromClass(
     destroy() {
       this.observer && this.observer.disconnect();
       this.highlightLayerEl && this.highlightLayerEl.detach();
+      document.body.removeClass("active-visual-line");
     }
   }
 );

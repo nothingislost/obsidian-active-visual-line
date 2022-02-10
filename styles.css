@@ -2,9 +2,14 @@
   --active-line-bg: hsl(62 11% 63% / 15%); /* 🏴‍☠️ */
 }
 
+.cm-highlightLayer {
+  z-index: 10;
+  contain: size style;
+  pointer-events: none;
+}
+
 .cm-active-visual-line {
-  z-index: -1; /* this must be a value < 0 */
-  padding: 2px 0; /* this is not easily changed */
   background-color: var(--active-line-bg);
+  padding: 2px 0; /* padding is not easily changed since the top and height of the highlight are programatically derived */
   position: absolute !important; /* everything breaks if this isn't absolute */
 }
