@@ -13,9 +13,10 @@ export const activeVisualLine = ViewPlugin.fromClass(
     createObserver(view: EditorView) {
       const config = { attributes: true, childList: true, subtree: true },
         selectionLayer = view.dom.querySelector(".cm-selectionLayer"),
-        cursorLayer = view.dom.querySelector(".cm-cursorLayer"),
+        cursorLayer = view.dom.querySelector(".cm-vimCursorLayer"),
+        vimCursor = view.dom.querySelector(".cm-fat-cursor"),
         contentDOM = view.dom;
-      if (!selectionLayer || !cursorLayer) return;
+      if (!selectionLayer || !vimCursor) return;
       document.body.addClass("active-visual-line");
       this.highlightLayerEl = view.scrollDOM.createDiv("cm-highlightLayer");
       this.highlightLayerEl.ariaHidden = "true";
@@ -29,13 +30,13 @@ export const activeVisualLine = ViewPlugin.fromClass(
           let height: number, top: number;
           if (mutation.type === "childList") {
             let cursorEl = Array.from(mutation.addedNodes).find(
-              el => el instanceof HTMLElement && el.hasClass("cm-cursor-primary")
+              el => el instanceof HTMLElement && el.hasClass("cm-fat-cursor")
             ) as HTMLElement;
             if (cursorEl) {
               height = parseInt(cursorEl.style.height);
               top = parseInt(cursorEl.style.top);
             }
-          } else if (mutation.target instanceof HTMLElement && mutation.target.hasClass("cm-cursor-primary")) {
+          } else if (mutation.target instanceof HTMLElement && mutation.target.hasClass("cm-fat-cursor")) {
             height = parseInt(mutation.target.style.height);
             top = parseInt(mutation.target.style.top);
           }
